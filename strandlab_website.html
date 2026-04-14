@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StrandLab — Stronger Strands. Smarter Growth.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #C8A84B;
+      --gold-light: #F0D97A;
+      --gold-dim: rgba(200,168,75,0.15);
+      --black: #080808;
+      --dark: #0E0E0E;
+      --dark2: #141414;
+      --dark3: #1A1A1A;
+      --text: #E8E0D0;
+      --text-muted: #7A7060;
+      --text-dim: #3A3530;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ── */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(200,168,75,0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.25s ease;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.5rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.625rem 1.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,168,75,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,168,75,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 80% 20%, rgba(200,168,75,0.04) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero h1 .line2 {
+      display: block;
+      font-size: clamp(2rem, 6vw, 5.5rem);
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .hero-sub {
+      max-width: 520px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin: 0 auto 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1.25rem; align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+      flex-wrap: wrap; justify-content: center;
+    }
+
+    .btn-primary {
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none; cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--text-dim);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      padding: 2rem 0;
+      border-top: 1px solid var(--text-dim);
+      border-bottom: 1px solid var(--text-dim);
+      overflow: hidden;
+      background: var(--dark2);
+    }
+    .marquee-track {
+      display: flex; gap: 4rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .marquee-dot {
+      color: var(--gold);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 8rem 4rem; }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ── ABOUT / MISSION ── */
+    .mission {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mission-text p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .mission-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .mission-visual {
+      position: relative;
+    }
+    .mission-card {
+      background: var(--dark2);
+      border: 1px solid var(--text-dim);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── FEATURES ── */
+    .features-section {
+      background: var(--dark2);
+    }
+    .features-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 6rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--dark3);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .feature-card:hover { background: var(--dark2); }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .feature-card:hover::after { transform: scaleX(1); }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .feature-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .feature-desc {
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    /* ── HAIR TYPES ── */
+    .hair-types-section {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hair-types-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .type-card {
+      border: 1px solid var(--text-dim);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .type-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .type-card.featured {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .type-emoji { font-size: 2.5rem; margin-bottom: 1.25rem; display: block; }
+    .type-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .type-range {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .type-desc {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ── PROCESS ── */
+    .process-section {
+      background: var(--dark2);
+    }
+    .process-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 5rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 2.5rem; left: 12.5%; right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+      opacity: 0.3;
+    }
+    .process-step { padding: 0 2rem; text-align: center; }
+    .step-circle {
+      width: 5rem; height: 5rem;
+      border: 1px solid var(--text-dim);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      background: var(--dark2);
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    .process-step:hover .step-circle {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .step-desc {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ── POROSITY ── */
+    .porosity-section {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .porosity-bars {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .porosity-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 120px;
+      gap: 2rem;
+      align-items: center;
+    }
+    .porosity-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+    }
+    .porosity-bar-bg {
+      height: 2px;
+      background: var(--text-dim);
+      position: relative;
+    }
+    .porosity-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.5s ease;
+    }
+    .porosity-bar-fill.animate { transform: scaleX(1); }
+    .porosity-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      background: var(--dark2);
+      text-align: center;
+    }
+    .testimonials-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 5rem;
+    }
+    .testimonial-card {
+      background: var(--dark3);
+      padding: 3rem 2.5rem;
+      text-align: left;
+    }
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .testimonial-author {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .testimonial-hair {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── WAITLIST / CTA ── */
+    .waitlist-section {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .waitlist-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,168,75,0.06) 0%, transparent 70%);
+    }
+    .waitlist-inner {
+      position: relative; z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .waitlist-section .section-title {
+      font-size: clamp(3rem, 7vw, 7rem);
+    }
+    .waitlist-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .waitlist-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+    }
+    .waitlist-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: var(--dark2);
+      border: 1px solid var(--text-dim);
+      border-right: none;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .waitlist-input:focus { border-color: var(--gold); }
+    .waitlist-input::placeholder { color: var(--text-muted); }
+    .waitlist-btn {
+      padding: 1rem 2rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .waitlist-btn:hover { background: var(--gold-light); }
+    .waitlist-note {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    .founder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem 1.5rem;
+      border: 1px solid var(--gold-dim);
+      background: var(--gold-dim);
+      margin-bottom: 3rem;
+    }
+    .founder-badge span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .spots-left {
+      font-size: 1.5rem;
+      color: var(--gold-light);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem;
+      border-top: 1px solid var(--text-dim);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .footer-brand .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .footer-brand p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .footer-links h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.75rem; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      nav ul { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .mission { grid-template-columns: 1fr; gap: 3rem; }
+      .features-grid { grid-template-columns: 1fr; gap: 2px; }
+      .types-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .process-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hair-types-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      footer { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-input { border-right: 1px solid var(--text-dim); border-bottom: none; }
+      .porosity-row { grid-template-columns: 120px 1fr 80px; gap: 1rem; }
+      .hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">StrandLab</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#hair-types">Hair Types</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#waitlist">Waitlist</a></li>
+    </ul>
+    <a href="#waitlist" class="nav-cta">Join the Lab</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-label">Hair Science · Porosity Intelligence · Growth Tracking</div>
+    <h1>
+      Know your <em>strands.</em>
+      <span class="line2">Love your results.</span>
+    </h1>
+    <p class="hero-sub">
+      StrandLab is the first app that builds your entire hair routine around your specific porosity level — from quiz to custom routine to matched products.
+    </p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Join the Waitlist</a>
+      <a href="#features" class="btn-ghost">Explore the Lab</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item">Porosity Intelligence <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Custom Routines <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">1A to 4C <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Waves Workshop <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Locs Lab <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Growth Tracker <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Science-Backed <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Porosity Intelligence <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Custom Routines <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">1A to 4C <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Waves Workshop <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Locs Lab <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Growth Tracker <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Science-Backed <span class="marquee-dot">✦</span></span>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section>
+    <div class="mission">
+      <div class="mission-text reveal">
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title">Built for every <em>strand</em></h2>
+        <p>Most hair products are marketed to everyone but made for no one. <strong>StrandLab changes that.</strong> We use your hair's unique porosity level — the single most important factor in how your hair absorbs moisture — to build a routine that actually works.</p>
+        <p>Whether you're rocking 4C coils, 2B waves, starter locs or a fresh 360 — <strong>your strands deserve a science-backed plan.</strong></p>
+        <a href="#waitlist" class="btn-primary" style="margin-top:1rem;">Claim Your Founding Spot</a>
+      </div>
+      <div class="mission-visual reveal reveal-delay-2">
+        <div class="mission-card">
+          <div class="stat-grid">
+            <div class="stat-item">
+              <div class="stat-num">8</div>
+              <div class="stat-label">Quiz Questions</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">5</div>
+              <div class="stat-label">Porosity Levels</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">1A–4C</div>
+              <div class="stat-label">Hair Types</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Personalised</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="features-header reveal">
+      <div class="section-label">What's Inside</div>
+      <h2 class="section-title">The full <em>Lab</em></h2>
+      <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:500px;margin:0 auto">Everything your hair needs in one science-backed ecosystem.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔬</span>
+        <div class="feature-num">01</div>
+        <div class="feature-title">Porosity Quiz</div>
+        <p class="feature-desc">8 questions. 60 seconds. Walk away knowing your exact hair type, porosity level, density and moisture balance — explained in plain language.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">📋</span>
+        <div class="feature-num">02</div>
+        <div class="feature-title">Custom Routine</div>
+        <p class="feature-desc">A full 7-day weekly routine built around your results. Wash days, deep condition days, protein treatments — all tailored to your porosity.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🛍️</span>
+        <div class="feature-num">03</div>
+        <div class="feature-title">Product Matches</div>
+        <p class="feature-desc">Browse products curated for your exact profile. Every recommendation accounts for your porosity so moisture actually reaches your strands.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">📸</span>
+        <div class="feature-num">04</div>
+        <div class="feature-title">Growth Tracker</div>
+        <p class="feature-desc">Monthly photo check-ins with side-by-side comparisons. See exactly how far your hair has come and what's working.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🌊</span>
+        <div class="feature-num">05</div>
+        <div class="feature-title">Waves Workshop</div>
+        <p class="feature-desc">Dedicated systems for 180, 360, 540 and 720 waves. Brushing schedules, du-rag timing, moisture routines and progression tracking.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🔒</span>
+        <div class="feature-num">06</div>
+        <div class="feature-title">Locs Lab</div>
+        <p class="feature-desc">Stage-specific care from Starter Locs all the way to Mature Locs. Retwist reminders, length tracking and what to expect at every stage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAIR TYPES -->
+  <section id="hair-types">
+    <div class="hair-types-section">
+      <div class="hair-types-header reveal">
+        <div>
+          <div class="section-label">Hair Types</div>
+          <h2 class="section-title">Built for <em>everyone</em></h2>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;max-width:300px;text-align:right;line-height:1.7">Every curl pattern, wave type and loc stage is supported.</p>
+      </div>
+      <div class="types-grid">
+        <div class="type-card reveal">
+          <span class="type-emoji">〰️</span>
+          <div class="type-name">Straight</div>
+          <div class="type-range">Type 1A — 1C</div>
+          <p class="type-desc">Fine to coarse. Oily roots, dry ends. StrandLab balances your scalp health with lightweight hydration.</p>
+        </div>
+        <div class="type-card reveal reveal-delay-1">
+          <span class="type-emoji">〜</span>
+          <div class="type-name">Wavy</div>
+          <div class="type-range">Type 2A — 2C</div>
+          <p class="type-desc">Loose S-patterns prone to frizz. Your routine focuses on definition and moisture balance.</p>
+        </div>
+        <div class="type-card featured reveal reveal-delay-2">
+          <span class="type-emoji">🌀</span>
+          <div class="type-name">Curly</div>
+          <div class="type-range">Type 3A — 3C</div>
+          <p class="type-desc">Defined spirals that need consistent moisture. Products and routines matched to your curl diameter.</p>
+        </div>
+        <div class="type-card reveal reveal-delay-3">
+          <span class="type-emoji">✨</span>
+          <div class="type-name">Coily</div>
+          <div class="type-range">Type 4A — 4C</div>
+          <p class="type-desc">Tight coils and kinks with the highest shrinkage. Deep moisture and protective styling plans built for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="process-section" id="how">
+    <div class="process-inner">
+      <div class="reveal" style="text-align:center;max-width:500px;margin:0 auto">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Four steps to your <em>best hair</em></h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-circle">01</div>
+          <div class="step-title">Take the Quiz</div>
+          <p class="step-desc">Answer 8 questions about how your hair looks, feels and behaves. No camera needed.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-circle">02</div>
+          <div class="step-title">Get Your Profile</div>
+          <p class="step-desc">Receive your hair type, porosity level, density and moisture balance — all in plain language.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-circle">03</div>
+          <div class="step-title">Shop Your Matches</div>
+          <p class="step-desc">Browse products curated specifically for your profile. No more guessing at the beauty supply.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-circle">04</div>
+          <div class="step-title">Follow Your Routine</div>
+          <p class="step-desc">A personalised weekly plan — wash days, treatments and styling steps built for your strands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POROSITY -->
+  <section>
+    <div class="porosity-section">
+      <div class="reveal">
+        <div class="section-label">The Science</div>
+        <h2 class="section-title">Porosity is <em>everything</em></h2>
+        <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:600px;margin-bottom:1rem">Your hair's porosity level — how well it absorbs and retains moisture — determines which products will actually work for you. Most people have never had theirs tested.</p>
+      </div>
+      <div class="porosity-bars reveal">
+        <div class="porosity-row">
+          <div class="porosity-name">Low Porosity</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:25%"></div></div>
+          <div class="porosity-tag">Resists moisture</div>
+        </div>
+        <div class="porosity-row">
+          <div class="porosity-name">Low-Normal</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:45%"></div></div>
+          <div class="porosity-tag">Moderate absorption</div>
+        </div>
+        <div class="porosity-row">
+          <div class="porosity-name">Normal</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:65%"></div></div>
+          <div class="porosity-tag">Ideal balance</div>
+        </div>
+        <div class="porosity-row">
+          <div class="porosity-name">High-Normal</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:80%"></div></div>
+          <div class="porosity-tag">Absorbs quickly</div>
+        </div>
+        <div class="porosity-row">
+          <div class="porosity-name">High Porosity</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:100%"></div></div>
+          <div class="porosity-tag">Loses moisture fast</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="testimonials-inner">
+      <div class="reveal">
+        <div class="section-label">Early Access</div>
+        <h2 class="section-title">From the <em>Lab</em></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <p class="testimonial-quote">"I've been spending hundreds on products that weren't even made for my porosity level. StrandLab finally told me what I actually need."</p>
+          <div class="testimonial-author">Founding Member #004</div>
+          <div class="testimonial-hair">Type 4C · High Porosity</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <p class="testimonial-quote">"The Waves Workshop is exactly what I needed. A brushing schedule and du-rag timer built specifically for 360 waves. Nothing else has this."</p>
+          <div class="testimonial-author">Founding Member #007</div>
+          <div class="testimonial-hair">360 Waves</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <p class="testimonial-quote">"Being able to track my loc journey from starter locs with stage-specific advice — this app genuinely understands what I'm going through."</p>
+          <div class="testimonial-author">Founding Member #012</div>
+          <div class="testimonial-hair">Budding Stage Locs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist-section" id="waitlist">
+    <div class="waitlist-bg"></div>
+    <div class="waitlist-inner">
+      <div class="founder-badge reveal">
+        <span>🥇</span>
+        <span>Founding Member · <span class="spots-left">89</span> spots remaining</span>
+      </div>
+      <h2 class="section-title reveal">Join the <em>Lab</em></h2>
+      <p class="waitlist-sub reveal">The first 100 Founding Members lock in 50% off all future StrandLab premium features — forever. Your strands will thank you.</p>
+      <div class="waitlist-form reveal" id="waitlist-form">
+        <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email address" />
+        <button class="waitlist-btn" onclick="handleWaitlist()">Join Now</button>
+      </div>
+      <p class="waitlist-note reveal">No spam, ever. We'll only email you when it's ready.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <span class="logo">StrandLab</span>
+      <p>The science-backed hair app built for every strand — from 1A to 4C, waves to locs.</p>
+      <p style="margin-top:1rem;font-size:0.75rem;color:var(--text-dim)">Stronger Strands. Smarter Growth.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#hair-types">Hair Types</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#waitlist">Join Waitlist</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 StrandLab. All rights reserved.</p>
+    <p>Built for every strand.</p>
+  </div>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 4 + 'px';
+      cursor.style.top = my - 4 + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx - 16 + 'px';
+      ring.style.top = ry - 16 + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // Animate porosity bars
+          if (e.target.classList.contains('porosity-bars')) {
+            e.target.querySelectorAll('.porosity-bar-fill').forEach(b => b.classList.add('animate'));
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Waitlist
+    function handleWaitlist() {
+      const input = document.getElementById('waitlist-email');
+      const form = document.getElementById('waitlist-form');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        input.style.borderColor = '#ef4444';
+        setTimeout(() => input.style.borderColor = '', 2000);
+        return;
+      }
+      const btn = form.querySelector('button');
+      btn.textContent = 'Joining...'; btn.disabled = true;
+
+      const cb = 'ml_cb_' + Date.now();
+      window[cb] = function() {
+        form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-size:1.5rem;font-style:italic;color:var(--gold)">You\'re in the Lab. 🧬 Check your inbox.</p>';
+        delete window[cb];
+      };
+      const s = document.createElement('script');
+      s.src = 'https://assets.mailerlite.com/jsonp/2248700/forms/7Hag1g/subscribe?callback=' + cb + '&fields%5Bemail%5D=' + encodeURIComponent(email) + '&ml-submit=1&anticsrf=true';
+      document.head.appendChild(s);
+      setTimeout(() => {
+        if (document.getElementById('waitlist-form')) {
+          form.innerHTML = '<p style="font-family:\'Cormorant Garamond\',serif;font-size:1.5rem;font-style:italic;color:var(--gold)">You\'re in the Lab. 🧬 Check your inbox.</p>';
+        }
+      }, 4000);
+    }
+
+    // Enter key on waitlist
+    document.getElementById('waitlist-email').addEventListener('keypress', e => {
+      if (e.key === 'Enter') handleWaitlist();
+    });
+  </script>
+</body>
+</html>
