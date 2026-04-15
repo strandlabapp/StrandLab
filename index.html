@@ -755,6 +755,32 @@
       .porosity-row { grid-template-columns: 120px 1fr 80px; gap: 1rem; }
       .hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
     }
+  
+  /* Counter bar */
+  .counter-bar {
+    width: 100%;
+    max-width: 480px;
+    height: 3px;
+    background: var(--text-dim);
+    margin: 1rem auto 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .counter-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    transition: width 2s ease;
+  }
+  .counter-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+  }
+  .counter-label span { color: var(--gold); }
+
   </style>
 </head>
 <body>
@@ -830,11 +856,11 @@
         <div class="mission-card">
           <div class="stat-grid">
             <div class="stat-item">
-              <div class="stat-num">8</div>
-              <div class="stat-label">Quiz Questions</div>
+              <div class="stat-num">🔬</div>
+              <div class="stat-label">Short Quiz</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">5</div>
+              <div class="stat-num">3</div>
               <div class="stat-label">Porosity Levels</div>
             </div>
             <div class="stat-item">
@@ -863,7 +889,7 @@
         <span class="feature-icon">🔬</span>
         <div class="feature-num">01</div>
         <div class="feature-title">Porosity Quiz</div>
-        <p class="feature-desc">8 questions. 60 seconds. Walk away knowing your exact hair type, porosity level, density and moisture balance — explained in plain language.</p>
+        <p class="feature-desc">Take a short quiz to figure out your hair porosity. Walk away knowing your exact hair type and porosity level — explained in plain language.</p>
       </div>
       <div class="feature-card reveal reveal-delay-1">
         <span class="feature-icon">📋</span>
@@ -948,7 +974,7 @@
         <div class="process-step reveal">
           <div class="step-circle">01</div>
           <div class="step-title">Take the Quiz</div>
-          <p class="step-desc">Answer 8 questions about how your hair looks, feels and behaves. No camera needed.</p>
+          <p class="step-desc">Take a short quiz to figure out your hair porosity. No camera needed.</p>
         </div>
         <div class="process-step reveal reveal-delay-1">
           <div class="step-circle">02</div>
@@ -975,7 +1001,7 @@
       <div class="reveal">
         <div class="section-label">The Science</div>
         <h2 class="section-title">Porosity is <em>everything</em></h2>
-        <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:600px;margin-bottom:1rem">Your hair's porosity level — how well it absorbs and retains moisture — determines which products will actually work for you. Most people have never had theirs tested.</p>
+        <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;max-width:600px;margin-bottom:1rem">Your hair's porosity level — how well it absorbs and retains moisture — determines which products will actually work for you. StrandLab identifies your level as Low, Medium or High and builds your routine around it.</p>
       </div>
       <div class="porosity-bars reveal">
         <div class="porosity-row">
@@ -984,19 +1010,9 @@
           <div class="porosity-tag">Resists moisture</div>
         </div>
         <div class="porosity-row">
-          <div class="porosity-name">Low-Normal</div>
-          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:45%"></div></div>
-          <div class="porosity-tag">Moderate absorption</div>
-        </div>
-        <div class="porosity-row">
-          <div class="porosity-name">Normal</div>
-          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:65%"></div></div>
+          <div class="porosity-name">Medium Porosity</div>
+          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:60%"></div></div>
           <div class="porosity-tag">Ideal balance</div>
-        </div>
-        <div class="porosity-row">
-          <div class="porosity-name">High-Normal</div>
-          <div class="porosity-bar-bg"><div class="porosity-bar-fill" style="width:80%"></div></div>
-          <div class="porosity-tag">Absorbs quickly</div>
         </div>
         <div class="porosity-row">
           <div class="porosity-name">High Porosity</div>
@@ -1040,10 +1056,14 @@
     <div class="waitlist-inner">
       <div class="founder-badge reveal">
         <span>🥇</span>
-        <span>Founding Member · <span class="spots-left">89</span> spots remaining</span>
+        <span>Founding Member · <span id="spotsCounter">93</span> spots remaining</span>
       </div>
+      <div class="counter-bar reveal">
+        <div class="counter-bar-fill" id="counterFill"></div>
+      </div>
+      <p class="counter-label reveal"><span id="takenSpots">7</span> of 100 Founding Member spots claimed</p>
       <h2 class="section-title reveal">Join the <em>Lab</em></h2>
-      <p class="waitlist-sub reveal">The first 100 Founding Members lock in 50% off all future StrandLab premium features — forever. Your strands will thank you.</p>
+      <p class="waitlist-sub reveal">The first 100 Founding Members lock in 50% off all future StrandLab premium features — forever. After 100 spots are gone you'll join the general queue. Your strands will thank you.</p>
       <div class="waitlist-form reveal" id="waitlist-form">
         <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email address" />
         <button class="waitlist-btn" onclick="handleWaitlist()">Join Now</button>
@@ -1116,6 +1136,18 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
+
+    // Founding counter — change SIGNED_UP to update
+    const SIGNED_UP = 7; // update this number as signups come in
+    const TOTAL = 100;
+    const remaining = Math.max(0, TOTAL - SIGNED_UP);
+    const pct = (SIGNED_UP / TOTAL) * 100;
+    document.getElementById('spotsCounter').textContent = remaining;
+    document.getElementById('takenSpots').textContent = SIGNED_UP;
+    setTimeout(() => {
+      const fill = document.getElementById('counterFill');
+      if (fill) fill.style.width = pct + '%';
+    }, 800);
 
     // Waitlist
     function handleWaitlist() {
