@@ -1042,9 +1042,8 @@
       <p class="counter-label reveal"><span id="takenSpots">7</span> of 100 Founding Member spots claimed</p>
       <h2 class="section-title reveal">Join the <em>Lab</em></h2>
       <p class="waitlist-sub reveal">The first 100 Founding Members get <strong style="color:var(--gold)">free access to all StrandLab premium features — forever.</strong> After 100 spots are gone you'll join the general queue. Your strands will thank you.</p>
-      <div class="waitlist-form reveal" id="waitlist-form">
-        <input type="email" class="waitlist-input" id="waitlist-email" placeholder="Enter your email address" />
-        <button class="waitlist-btn" onclick="handleWaitlist()">Join Now</button>
+      <div class="reveal" style="width:100%;max-width:480px;margin:0 auto;">
+        <div class="ml-embedded" data-form="7Hag1g"></div>
       </div>
       <p class="waitlist-note reveal">No spam, ever. We'll only email you when it's ready.</p>
     </div>
@@ -1162,5 +1161,37 @@
       if (e.key === 'Enter') handleWaitlist();
     });
   </script>
+
+<!-- MailerLite Universal -->
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2248700');
+</script>
+<!-- End MailerLite Universal -->
+
+<style>
+.ml-embedded * { color: #C8A84B !important; }
+.ml-embedded input[type="email"] {
+  background: #141414 !important;
+  border: 1px solid rgba(200,168,75,0.3) !important;
+  color: #F0F0F0 !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 0.9375rem !important;
+  width: 100% !important;
+}
+.ml-embedded input[type="email"]::placeholder { color: #7A7060 !important; }
+.ml-embedded button, .ml-embedded button[type="submit"] {
+  background: #C8A84B !important;
+  color: #080808 !important;
+  font-weight: 700 !important;
+  padding: 1rem 2rem !important;
+  width: 100% !important;
+  margin-top: 0.5rem !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+.ml-embedded button:hover { background: #F0D97A !important; }
+.ml-embedded .ml-form-embedContent { display: none !important; }
+</style>
 </body>
 </html>
