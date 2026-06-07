@@ -20,9 +20,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--black);
       color: var(--text);
@@ -31,7 +29,6 @@
       overflow-x: hidden;
     }
 
-    /* ── CURSOR ── */
     .cursor {
       width: 8px; height: 8px;
       background: var(--gold);
@@ -52,7 +49,6 @@
       transition: all 0.25s ease;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.5rem 4rem;
@@ -88,12 +84,8 @@
       text-decoration: none;
       transition: all 0.3s;
     }
-    .nav-cta:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
 
-    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -103,7 +95,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .hero-bg {
       position: absolute; inset: 0;
       background:
@@ -111,7 +102,6 @@
         radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,168,75,0.04) 0%, transparent 50%),
         radial-gradient(ellipse 40% 40% at 80% 20%, rgba(200,168,75,0.04) 0%, transparent 50%);
     }
-
     .hero-grid {
       position: absolute; inset: 0;
       background-image:
@@ -120,7 +110,6 @@
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
     }
-
     .hero-label {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
@@ -131,7 +120,6 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
-
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3.5rem, 10vw, 9rem);
@@ -142,17 +130,13 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.4s forwards;
     }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
     .hero h1 .line2 {
       display: block;
       font-size: clamp(2rem, 6vw, 5.5rem);
       color: var(--text-muted);
       margin-top: 0.5rem;
     }
-
     .hero-sub {
       max-width: 520px;
       font-size: 1rem;
@@ -162,12 +146,54 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.6s forwards;
     }
-
     .hero-actions {
       display: flex; gap: 1.25rem; align-items: center;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.8s forwards;
       flex-wrap: wrap; justify-content: center;
+    }
+
+    /* ── STORE BADGES ── */
+    .store-badges {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all 0.3s;
+      background: transparent;
+    }
+    .store-badge:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .store-badge:hover svg path,
+    .store-badge:hover svg rect,
+    .store-badge:hover svg polygon { fill: var(--black); }
+    .store-badge-icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .store-badge-text { display: flex; flex-direction: column; }
+    .store-badge-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+    .store-badge-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
     .btn-primary {
@@ -183,11 +209,7 @@
       transition: all 0.3s;
       display: inline-block;
     }
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-    }
-
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
     .btn-ghost {
       padding: 1rem 2.5rem;
       background: transparent;
@@ -202,10 +224,7 @@
       transition: all 0.3s;
       display: inline-block;
     }
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
     .hero-scroll {
       position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
@@ -224,7 +243,6 @@
       animation: scrollPulse 2s ease infinite;
     }
 
-    /* ── MARQUEE ── */
     .marquee-section {
       padding: 2rem 0;
       border-top: 1px solid var(--text-dim);
@@ -245,13 +263,9 @@
       letter-spacing: 0.05em;
       flex-shrink: 0;
     }
-    .marquee-dot {
-      color: var(--gold);
-    }
+    .marquee-dot { color: var(--gold); }
 
-    /* ── SECTIONS ── */
     section { padding: 8rem 4rem; }
-
     .section-label {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -260,7 +274,6 @@
       color: var(--gold);
       margin-bottom: 1.5rem;
     }
-
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.5rem, 5vw, 5rem);
@@ -271,7 +284,6 @@
     }
     .section-title em { font-style: italic; color: var(--gold); }
 
-    /* ── ABOUT / MISSION ── */
     .mission {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -286,13 +298,8 @@
       color: var(--text-muted);
       margin-bottom: 1.5rem;
     }
-    .mission-text p strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .mission-visual {
-      position: relative;
-    }
+    .mission-text p strong { color: var(--text); font-weight: 500; }
+    .mission-visual { position: relative; }
     .mission-card {
       background: var(--dark2);
       border: 1px solid var(--text-dim);
@@ -307,12 +314,7 @@
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .stat-item { }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3rem;
@@ -328,15 +330,8 @@
       margin-top: 0.25rem;
     }
 
-    /* ── FEATURES ── */
-    .features-section {
-      background: var(--dark2);
-    }
-    .features-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 6rem;
-    }
+    .features-section { background: var(--dark2); }
+    .features-header { text-align: center; max-width: 600px; margin: 0 auto 6rem; }
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -362,11 +357,7 @@
       transition: transform 0.4s ease;
     }
     .feature-card:hover::after { transform: scaleX(1); }
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
+    .feature-icon { font-size: 2rem; margin-bottom: 1.5rem; display: block; }
     .feature-num {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -381,28 +372,16 @@
       margin-bottom: 1rem;
       color: var(--text);
     }
-    .feature-desc {
-      font-size: 0.875rem;
-      line-height: 1.8;
-      color: var(--text-muted);
-    }
+    .feature-desc { font-size: 0.875rem; line-height: 1.8; color: var(--text-muted); }
 
-    /* ── HAIR TYPES ── */
-    .hair-types-section {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .hair-types-section { max-width: 1200px; margin: 0 auto; }
     .hair-types-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       margin-bottom: 4rem;
     }
-    .types-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
+    .types-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .type-card {
       border: 1px solid var(--text-dim);
       padding: 2.5rem 2rem;
@@ -410,20 +389,10 @@
       transition: all 0.3s;
       cursor: default;
     }
-    .type-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-4px);
-    }
-    .type-card.featured {
-      border-color: var(--gold);
-      background: var(--gold-dim);
-    }
+    .type-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .type-card.featured { border-color: var(--gold); background: var(--gold-dim); }
     .type-emoji { font-size: 2.5rem; margin-bottom: 1.25rem; display: block; }
-    .type-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
+    .type-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
     .type-range {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -431,20 +400,10 @@
       color: var(--gold);
       margin-bottom: 1rem;
     }
-    .type-desc {
-      font-size: 0.8rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
+    .type-desc { font-size: 0.8rem; line-height: 1.7; color: var(--text-muted); }
 
-    /* ── PROCESS ── */
-    .process-section {
-      background: var(--dark2);
-    }
-    .process-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    .process-section { background: var(--dark2); }
+    .process-inner { max-width: 1200px; margin: 0 auto; }
     .process-steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -475,47 +434,15 @@
       z-index: 1;
       transition: all 0.3s;
     }
-    .process-step:hover .step-circle {
-      border-color: var(--gold);
-      background: var(--gold-dim);
-    }
-    .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
-    .step-desc {
-      font-size: 0.8rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
+    .process-step:hover .step-circle { border-color: var(--gold); background: var(--gold-dim); }
+    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .step-desc { font-size: 0.8rem; line-height: 1.7; color: var(--text-muted); }
 
-    /* ── POROSITY ── */
-    .porosity-section {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .porosity-bars {
-      margin-top: 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .porosity-row {
-      display: grid;
-      grid-template-columns: 200px 1fr 120px;
-      gap: 2rem;
-      align-items: center;
-    }
-    .porosity-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-    }
-    .porosity-bar-bg {
-      height: 2px;
-      background: var(--text-dim);
-      position: relative;
-    }
+    .porosity-section { max-width: 1200px; margin: 0 auto; }
+    .porosity-bars { margin-top: 4rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .porosity-row { display: grid; grid-template-columns: 200px 1fr 120px; gap: 2rem; align-items: center; }
+    .porosity-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+    .porosity-bar-bg { height: 2px; background: var(--text-dim); position: relative; }
     .porosity-bar-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--gold), var(--gold-light));
@@ -532,26 +459,10 @@
       text-align: right;
     }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials-section {
-      background: var(--dark2);
-      text-align: center;
-    }
-    .testimonials-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 5rem;
-    }
-    .testimonial-card {
-      background: var(--dark3);
-      padding: 3rem 2.5rem;
-      text-align: left;
-    }
+    .testimonials-section { background: var(--dark2); text-align: center; }
+    .testimonials-inner { max-width: 1000px; margin: 0 auto; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 5rem; }
+    .testimonial-card { background: var(--dark3); padding: 3rem 2.5rem; text-align: left; }
     .testimonial-quote {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.15rem;
@@ -567,95 +478,17 @@
       color: var(--gold);
       text-transform: uppercase;
     }
-    .testimonial-hair {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
+    .testimonial-hair { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
 
-    /* ── WAITLIST / CTA ── */
-    .waitlist-section {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    .waitlist-section { text-align: center; position: relative; overflow: hidden; }
     .waitlist-bg {
       position: absolute; inset: 0;
       background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,168,75,0.06) 0%, transparent 70%);
     }
-    .waitlist-inner {
-      position: relative; z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .waitlist-section .section-title {
-      font-size: clamp(3rem, 7vw, 7rem);
-    }
-    .waitlist-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 3rem;
-    }
-    .waitlist-form {
-      display: flex;
-      gap: 0;
-      max-width: 480px;
-      margin: 0 auto 1.5rem;
-    }
-    .waitlist-input {
-      flex: 1;
-      padding: 1rem 1.5rem;
-      background: var(--dark2);
-      border: 1px solid var(--text-dim);
-      border-right: none;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.875rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    .waitlist-input:focus { border-color: var(--gold); }
-    .waitlist-input::placeholder { color: var(--text-muted); }
-    .waitlist-btn {
-      padding: 1rem 2rem;
-      background: var(--gold);
-      color: var(--black);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: none; cursor: pointer;
-      transition: background 0.3s;
-      white-space: nowrap;
-    }
-    .waitlist-btn:hover { background: var(--gold-light); }
-    .waitlist-note {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-    .founder-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.625rem 1.5rem;
-      border: 1px solid var(--gold-dim);
-      background: var(--gold-dim);
-      margin-bottom: 3rem;
-    }
-    .founder-badge span {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-    .spots-left {
-      font-size: 1.5rem;
-      color: var(--gold-light);
-    }
+    .waitlist-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .waitlist-section .section-title { font-size: clamp(3rem, 7vw, 7rem); }
+    .waitlist-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 3rem; }
 
-    /* ── FOOTER ── */
     footer {
       padding: 4rem;
       border-top: 1px solid var(--text-dim);
@@ -673,11 +506,7 @@
       display: block;
       margin-bottom: 1rem;
     }
-    .footer-brand p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
+    .footer-brand p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
     .footer-links h4 {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -688,12 +517,7 @@
     }
     .footer-links ul { list-style: none; }
     .footer-links li { margin-bottom: 0.75rem; }
-    .footer-links a {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
     .footer-links a:hover { color: var(--gold); }
     .footer-bottom {
       padding: 2rem 4rem;
@@ -702,13 +526,8 @@
       justify-content: space-between;
       align-items: center;
     }
-    .footer-bottom p {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
+    .footer-bottom p { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.05em; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -721,22 +540,46 @@
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
     }
-
     .reveal {
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ── MOBILE ── */
+    .counter-bar { width: 100%; max-width: 480px; height: 3px; background: var(--text-dim); margin: 1rem auto 0.5rem; position: relative; overflow: hidden; }
+    .counter-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); width: 0%; transition: width 2s ease; }
+    .counter-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .counter-label span { color: var(--gold); }
+
+    .preview-section { background: var(--dark2); }
+    .preview-header { text-align: center; max-width: 600px; margin: 0 auto 5rem; }
+    .preview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; align-items: start; }
+    .preview-phone {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--text-dim);
+      transition: all 0.4s ease;
+      background: var(--black);
+    }
+    .preview-phone:hover { border-color: var(--gold); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(200,168,75,0.15); }
+    .preview-phone img { width: 100%; height: auto; display: block; }
+    .preview-phone-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: var(--dark3);
+    }
+
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
       nav ul { display: none; }
@@ -750,86 +593,17 @@
       .hair-types-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
       footer { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
       .footer-bottom { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
-      .waitlist-form { flex-direction: column; }
-      .waitlist-input { border-right: 1px solid var(--text-dim); border-bottom: none; }
       .porosity-row { grid-template-columns: 120px 1fr 80px; gap: 1rem; }
       .hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
+      .preview-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .store-badges { flex-direction: column; align-items: center; }
     }
-  
-  /* Counter bar */
-  .counter-bar {
-    width: 100%;
-    max-width: 480px;
-    height: 3px;
-    background: var(--text-dim);
-    margin: 1rem auto 0.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .counter-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    width: 0%;
-    transition: width 2s ease;
-  }
-  .counter-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-bottom: 2.5rem;
-  }
-  .counter-label span { color: var(--gold); }
-
-  /* ── APP PREVIEW ── */
-  .preview-section {
-    background: var(--dark2);
-  }
-  .preview-header {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 5rem;
-  }
-  .preview-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: start;
-  }
-  .preview-phone {
-    position: relative;
-    border-radius: 24px;
-    overflow: hidden;
-    border: 2px solid var(--text-dim);
-    transition: all 0.4s ease;
-    background: var(--black);
-  }
-  .preview-phone:hover {
-    border-color: var(--gold);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(200,168,75,0.15);
-  }
-  .preview-phone img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .preview-phone-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    padding: 1rem 0.5rem;
-    background: var(--dark3);
-  }
-  @media (max-width: 900px) {
-    .preview-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-  }
-
+    @media (max-width: 900px) {
+      #quiz-preview .preview-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+    @media (max-width: 600px) {
+      #quiz-preview .preview-grid { grid-template-columns: 1fr 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -844,9 +618,12 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#hair-types">Hair Types</a></li>
       <li><a href="#how">How It Works</a></li>
-      <li><a href="#waitlist">Launch</a></li>
+      <li><a href="#waitlist">Download</a></li>
     </ul>
-    <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="nav-cta">Download iOS</a>
+    <div style="display:flex;gap:0.75rem;">
+      <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="nav-cta">iOS</a>
+      <a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank" class="nav-cta">Android</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -862,10 +639,28 @@
       StrandLab is the first app that builds your entire hair routine around your specific porosity level — from quiz to custom routine to matched products.
     </p>
     <div class="hero-actions">
-      <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="btn-primary">Download on the App Store</a>
-      <a href="#features" class="btn-ghost">Explore the Lab</a>
+      <div class="store-badges">
+        <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#C8A84B"/>
+          </svg>
+          <div class="store-badge-text">
+            <span class="store-badge-sub">Download on the</span>
+            <span class="store-badge-name">App Store</span>
+          </div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.18 23.76a1.5 1.5 0 0 1-.69-.17A1.64 1.64 0 0 1 1.5 22.1V1.9A1.64 1.64 0 0 1 2.49.41a1.5 1.5 0 0 1 1.54.1l17.5 10.1a1.64 1.64 0 0 1 0 2.78L4.03 23.49a1.5 1.5 0 0 1-.85.27z" fill="#C8A84B"/>
+          </svg>
+          <div class="store-badge-text">
+            <span class="store-badge-sub">Get it on</span>
+            <span class="store-badge-name">Google Play</span>
+          </div>
+        </a>
+      </div>
     </div>
-    <p style="margin-top: 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1s forwards;">✦ Available on iOS Now &nbsp;·&nbsp; Android — June 1 ✦</p>
+    <p style="margin-top: 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); opacity: 0; animation: fadeUp 0.8s ease 1s forwards;">✦ Now Available on iOS & Android ✦</p>
     <div style="margin-top: 3rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--text-muted); letter-spacing: 0.05em; opacity: 0; animation: fadeUp 0.8s ease 1s forwards;">
       Stronger Strands. Smarter Growth.
     </div>
@@ -908,8 +703,16 @@
         <h2 class="section-title">Built for every <em>strand</em></h2>
         <p>Most hair products are marketed to everyone but made for no one. <strong>StrandLab changes that.</strong> We use your hair's unique porosity level — the single most important factor in how your hair absorbs moisture — to build a routine that actually works.</p>
         <p>Whether you're rocking 4C coils, 2B wavy strands, starter locs or fresh 360 waves — <strong>your strands deserve a science-backed plan.</strong></p>
-        <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="btn-primary" style="margin-top:1rem;text-decoration:none;">Download on the App Store</a>
-        <p style="margin-top:0.75rem; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--text-muted); text-transform:uppercase;">Android — June 1</p>
+        <div class="store-badges" style="justify-content:flex-start; margin-top:1.5rem;">
+          <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="store-badge">
+            <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#C8A84B"/></svg>
+            <div class="store-badge-text"><span class="store-badge-sub">Download on the</span><span class="store-badge-name">App Store</span></div>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank" class="store-badge">
+            <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.76a1.5 1.5 0 0 1-.69-.17A1.64 1.64 0 0 1 1.5 22.1V1.9A1.64 1.64 0 0 1 2.49.41a1.5 1.5 0 0 1 1.54.1l17.5 10.1a1.64 1.64 0 0 1 0 2.78L4.03 23.49a1.5 1.5 0 0 1-.85.27z" fill="#C8A84B"/></svg>
+            <div class="store-badge-text"><span class="store-badge-sub">Get it on</span><span class="store-badge-name">Google Play</span></div>
+          </a>
+        </div>
       </div>
       <div class="mission-visual reveal reveal-delay-2">
         <div class="mission-card">
@@ -984,7 +787,7 @@
         <span class="feature-icon">✨</span>
         <div class="feature-num">07</div>
         <div class="feature-title">Style Mode</div>
-        <p class="feature-desc">Got braids, twists, a protective style or fresh retwist? Activate Style Mode and StrandLab tracks your install or retwist date, builds a care routine for your specific style, and alerts you when it's time to safely take it down or re-up.</p>
+        <p class="feature-desc">Got braids, twists, a protective style or fresh retwist? Activate Style Mode and StrandLab tracks your install date, builds a care routine for your specific style, and alerts you when it's time to safely take it down or re-up.</p>
       </div>
       <div class="feature-card reveal reveal-delay-4">
         <span class="feature-icon">🐺</span>
@@ -1095,6 +898,48 @@
   </section>
 
   <!-- APP PREVIEW -->
+  <section class="preview-section" id="quiz-preview" style="padding-bottom: 2rem;">
+    <div class="preview-header reveal">
+      <div class="section-label">The Quiz Experience</div>
+      <h2 class="section-title">Science in <em>every question</em></h2>
+      <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;">18 questions. Live porosity meter. Your personalised profile — ready in minutes.</p>
+    </div>
+    <div class="preview-grid" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="preview-phone reveal">
+        <img src="quiz_01_path.png" alt="Choose Your Hair Path">
+        <div class="preview-phone-label">Choose Your Path</div>
+      </div>
+      <div class="preview-phone reveal reveal-delay-1">
+        <img src="quiz_02_hairtype.png" alt="Hair Type Question">
+        <div class="preview-phone-label">Hair Type</div>
+      </div>
+      <div class="preview-phone reveal reveal-delay-2">
+        <img src="quiz_03_porosity.png" alt="Live Porosity Meter">
+        <div class="preview-phone-label">Live Porosity Meter</div>
+      </div>
+      <div class="preview-phone reveal reveal-delay-3">
+        <img src="quiz_04_ready.png" alt="Your Profile is Ready">
+        <div class="preview-phone-label">Profile Ready</div>
+      </div>
+      <div class="preview-phone reveal reveal-delay-4">
+        <img src="quiz_05_routine.png" alt="Your Custom Routine">
+        <div class="preview-phone-label">Your Routine</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 3rem;">
+      <div class="store-badges">
+        <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#C8A84B"/></svg>
+          <div class="store-badge-text"><span class="store-badge-sub">Download on the</span><span class="store-badge-name">App Store</span></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.76a1.5 1.5 0 0 1-.69-.17A1.64 1.64 0 0 1 1.5 22.1V1.9A1.64 1.64 0 0 1 2.49.41a1.5 1.5 0 0 1 1.54.1l17.5 10.1a1.64 1.64 0 0 1 0 2.78L4.03 23.49a1.5 1.5 0 0 1-.85.27z" fill="#C8A84B"/></svg>
+          <div class="store-badge-text"><span class="store-badge-sub">Get it on</span><span class="store-badge-name">Google Play</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="preview-section">
     <div class="preview-header reveal">
       <div class="section-label">Inside the App</div>
@@ -1121,19 +966,24 @@
     </div>
   </section>
 
-
-  <!-- WAITLIST -->
+  <!-- DOWNLOAD CTA -->
   <section class="waitlist-section" id="waitlist">
     <div class="waitlist-bg"></div>
     <div class="waitlist-inner reveal">
       <div class="section-label">Available Now</div>
       <h2 class="section-title">The Lab is <em>live</em></h2>
-      <p class="waitlist-sub">StrandLab is available now on iOS. Take the porosity quiz, get your custom routine, and shop matched products — all in one science-backed app.</p>
-      <div class="hero-actions" style="justify-content:center; margin-bottom: 1.5rem;">
-        <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="btn-primary">Download on the App Store</a>
-        <span class="btn-ghost" style="cursor:default; opacity:0.55; pointer-events:none;">Android — June 1</span>
+      <p class="waitlist-sub">StrandLab is now available on iOS and Android. Take the porosity quiz, get your custom routine, and shop matched products — all in one science-backed app.</p>
+      <div class="store-badges" style="margin-bottom: 2rem;">
+        <a href="https://apps.apple.com/app/id6765843232" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#C8A84B"/></svg>
+          <div class="store-badge-text"><span class="store-badge-sub">Download on the</span><span class="store-badge-name">App Store</span></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="none"><path d="M3.18 23.76a1.5 1.5 0 0 1-.69-.17A1.64 1.64 0 0 1 1.5 22.1V1.9A1.64 1.64 0 0 1 2.49.41a1.5 1.5 0 0 1 1.54.1l17.5 10.1a1.64 1.64 0 0 1 0 2.78L4.03 23.49a1.5 1.5 0 0 1-.85.27z" fill="#C8A84B"/></svg>
+          <div class="store-badge-text"><span class="store-badge-sub">Get it on</span><span class="store-badge-name">Google Play</span></div>
+        </a>
       </div>
-      <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color: var(--text-muted); text-transform:uppercase; margin-bottom:2.5rem;">Available on iOS now &nbsp;·&nbsp; Coming to Google Play June 1</p>
+      <p style="font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color: var(--text-muted); text-transform:uppercase; margin-bottom:2.5rem;">Now available on iOS & Android</p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="https://instagram.com/strandlabapp" target="_blank" class="btn-ghost" style="font-size:0.65rem; padding:0.75rem 1.5rem;">Instagram @strandlabapp</a>
         <a href="https://tiktok.com/@strandlabapp" target="_blank" class="btn-ghost" style="font-size:0.65rem; padding:0.75rem 1.5rem;">TikTok @strandlabapp</a>
@@ -1155,6 +1005,7 @@
         <li><a href="#hair-types">Hair Types</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="https://apps.apple.com/app/id6765843232" target="_blank">Download iOS</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.strandlabapp.strandlab" target="_blank">Download Android</a></li>
       </ul>
     </div>
     <div class="footer-links">
@@ -1175,7 +1026,6 @@
   </div>
 
   <script>
-    // Cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1193,13 +1043,11 @@
     }
     animRing();
 
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          // Animate porosity bars
           if (e.target.classList.contains('porosity-bars')) {
             e.target.querySelectorAll('.porosity-bar-fill').forEach(b => b.classList.add('animate'));
           }
@@ -1207,7 +1055,6 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
-
   </script>
 
 </body>
